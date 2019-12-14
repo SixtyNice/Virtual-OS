@@ -1,33 +1,40 @@
-.weather {
+.weather-wrapper {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-
-    .location,
-    .temperature {
-        height: 30vh;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 1rem;
+    padding-top: 3rem;
+    
+    .weather {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 50%;
-    }
-
-    .temperature {
+        color: white;
         flex-direction: column;
-    }
 
-    .degree-section {
-        display: flex;
-        align-items: center;
+        &__temperature-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
 
-        span {
-            margin: 10px;
-            font-size: 40px;
+            .weather__degree {
+                display: flex;
+                align-items: center;
+                font-size: 1.5rem;
+            }
         }
-        h2 {
-            font-size: 40px;
+
+        .weather__icon {
+            max-width: 200px;
+        }
+
+        &__location {
+            display: flex;
+            align-items: center;
+            padding-top: 1rem;
+
+            .weather__description {
+                padding-left: 1rem;
+                font-size: 1rem;
+            }
         }
     }
 }

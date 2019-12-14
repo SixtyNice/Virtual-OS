@@ -12,16 +12,23 @@ export default class Weather extends Component {
             temperature: 0,
             timezone: 'Europe/Praga',
             description: "It's friggin cold",
-            icon: ""
+            icon: "CLEAR_DAY"
         }
     }
 
     componentWillMount() {
+        console.log("Будет")
         this.getWeather();
     }
 
     componentDidMount() {
-        setInterval(this.getWeather, 1000);
+        console.log("уже")
+
+        // this.WeatherID = setInterval(this.getWeather, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.WeatherID);
     }
 
     getWeather() {
@@ -32,25 +39,27 @@ export default class Weather extends Component {
             navigator.geolocation.getCurrentPosition(position => {
                 long = position.coords.longitude;
                 lat = position.coords.latitude;
-
                 const proxy = 'https://cors-anywhere.herokuapp.com/';
-                const api = `${proxy}https://api.darksky.net/forecast/06537ef473c5445e3349899fd3dac545/${lat},${long}`
+                // const api = `${proxy}https://api.darksky.net/forecast/bb991e816b68e4fe560955bea5116bc5/${lat},${long}`
                 fetch(api)
                     .then(response => {
                         return response.json();
                     })
                     .then(data => {
-                        console.log(data);
+
                         const { temperature, summary, icon } = data.currently;
-                        let currentTemperature = ((temperature - 32) * 5 / 9).toFixed(1);
-                        currentTemperature > 0 ? `+${currentTemperature}` : `- ${currentTemperature}`;
-                        
+                        let currentTemperature = Math.round(((temperature - 32) * 5 / 9));
+
                         this.setState({
-                            temperature: currentTemperature,
+                            temperature: currentTemperature > 0 ? `+ ${currentTemperature}` : `- ${currentTemperature}`,
                             timezone: data.timezone,
                             description: summary,
-                            icon: icon.replace(/-/g, "_").toUpperCase()
+                            icon: icon.replace(/-/g, "_").toUpperCase() 
                         })
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        
                     })
             });
         }
@@ -58,24 +67,29 @@ export default class Weather extends Component {
 
 
 
+
     render() {
         return (
-            <div className="weather">
-                <div className="temperature">
-                    <div className="degree-section">
-                        <h2 className="temperature-degree">{this.state.temperature}</h2>
-                        <span>°</span>
-                        <Skycons
+            <div className="weather-wrapper">
+                <section className="weather">
+                    <div className="weather__temperature-section">
+                        <div className="weather__degree">
+                            <h2 className="weather__temperature">{this.state.temperature}</h2>
+                            <span>°</span>
+                        </div>
+
+                        <Skycons className='weather__icon'
                             color='white'
                             icon={this.state.icon}
                             autoplay={true}
                         />
+
                     </div>
-                </div>
-                <div className="location">
-                    <h1 className='location-timezone'>{this.state.timezone}</h1>
-                    <div className="temperature-description">{this.state.description}</div>
-                </div>
+                    <div className="weather__location">
+                        <div className='weather__timezone'>{this.state.timezone}</div>
+                        <div className="weather__description">{this.state.description}</div>
+                    </div>
+                </section>
             </div>
         )
     }
