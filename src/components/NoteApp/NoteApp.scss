@@ -1,0 +1,25 @@
+.note-app {
+    position: absolute;
+    width: 100px;
+    height: 125px;
+    background: #F7C821;
+    border-radius: 9px;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+
+    &__lines {
+        position: relative;
+        top: 19px;
+
+        .note-app__line {
+            width: 80%;
+            height: 1px;
+            background-color: black;
+            margin: 0 auto;
+            margin-top: 10px;
+        }
+    }
+
+
+}
