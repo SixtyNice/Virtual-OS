@@ -47,6 +47,7 @@ module.exports = {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
                             hmr: process.env.NODE_ENV === 'development',
+                            reloadAll: true,
                         },
                     },
                     
@@ -58,7 +59,7 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.js', 'jsx', '.css', 'sass', 'scss']
+        extensions: ['.js', '.jsx', '.css', '.sass', '.scss']
     },
 
     plugins: [htmlPlugin, minCss, optimizeCss]
