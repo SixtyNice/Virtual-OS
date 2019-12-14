@@ -3,7 +3,7 @@
     background-color: #212433;
     position: absolute;
     bottom: 0;
-    height: 5vh;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,7 +14,7 @@
         flex-direction: column;
         color: white;
         text-align: center;
-        font-size: 14px;
+        font-size: .75rem;
         border-left: 1px solid white;
         height: 100%;
         justify-content: center;
@@ -24,4 +24,6 @@
     &__date {
         padding-right: 10px
     }
+
+    
 }
